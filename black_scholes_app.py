@@ -32,6 +32,16 @@ def black_scholes(s, k, t, r, sigma, option_type="call"):
 
 black_scholes = jit(black_scholes, static_argnames=["option_type"])
 
+delta = grad(black_scholes, argnums=0)
+
+gamma = grad(delta, argnums=0)
+
+vega = grad(black_scholes, argnums=4)
+
+rho= grad(black_scholes, argnums=3)
+
+theta= grad(black_scholes, argnums=2)
+
 st.title("Black Scholes Option Pricing")
 
 st.markdown("Enter the option parameters below:")
