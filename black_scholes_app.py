@@ -1,11 +1,11 @@
 from jax import jit
 import jax.numpy as jnp
 from jax.scipy.stats import norm
+from jax import grad
 import streamlit as st
 
 
 
-@jit
 def black_scholes(s, k, t, r, sigma, option_type="call"):
     
     # S = Stock Price
@@ -30,7 +30,7 @@ def black_scholes(s, k, t, r, sigma, option_type="call"):
     
     return price
 
-
+black_scholes = jit(black_scholes, static_argnames=["option_type"])
 
 st.title("Black Scholes Option Pricing")
 
