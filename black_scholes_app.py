@@ -159,48 +159,27 @@ with tab2:
     
 with tab3:
 
-    st.header("Background: Why I Made This")
+    st.header("Background: Why I am making this?")
     st.markdown("""
-    This past year, I've developed a strong interest in **derivative markets** and **quantitative finance**.  
-    To deepen my understanding, I decided to build a program that automates core financial calculations.
+    This past year, I've developed a strong interest in derivative markets and quantitative finance.  
+    I wanted to build a project using some kind of model that would improve both my coding skills and knowledge of the math/statistics behind pricing models at the same time.
 
-    While exploring the space, I came across the **Black-Scholes option pricing model** and thought it would be a great concept to implement.  
-    This project would not only help solidify my understanding of options pricing but also give me something tangible to build and iterate on.
+    This led me to try and build a simple Black-Scholes options pricing calculator. The Black-Scholes model seems to be the most common and foundational models to learn about.  
+    This project is not meant to be a reliable tool for trading. I am aware of all the limitaions of the Black-Scholes model.
     """)
 
-    st.header("Libraries Used & Experience Gained")
+    st.header("Libraries Used")
     st.markdown("""
-    In the process of building this app, I improved my skills in:
+    To Build this python app, I used:
 
-    - **Python** – General scripting and logic  
-    - **Streamlit** – For building the interactive web interface  
-    - **Pandas** – For data manipulation and handling bulk input  
-    - **JAX / NumPy** – For fast numerical computations and vectorization  
+    - **Streamlit** – For building the web interface 
+    - **Pandas** – For handling and manipulating batch json file uploads  
+    - **JAX / NumPy** – For fast numerical computations 
 
-    Although JAX isn't being fully utilized in this particular app (e.g. no GPU acceleration or complex autodiff pipelines),  
-    I chose to integrate it early to build familiarity with its syntax and capabilities.  
-    I believe JAX will be highly useful in future work involving gradient-based optimization, Monte Carlo simulations, or machine learning.
+    I don't believe JAX is being fully utilized in this app with its little calulation needs. Regular numpy should've been fine. 
+    However, I still chose to use it as I feel getting familiar with the syntax will be useful in the future. I have read that JAX is useful for quantitative models using python.
     """)
 
-    st.header("Limitations & Perspective")
-    st.markdown("""
-    While Black-Scholes is a well-known and foundational model, I’m aware of its limitations:
-
-    - It assumes constant volatility and interest rates  
-    - It doesn’t handle American-style options or early exercise  
-    - It breaks down in extreme market conditions  
-
-    This tool isn’t meant to be practical for real-world trading. Rather, it's an **educational project**—a way for me to understand the math and logic behind options pricing and to improve as both a developer and a student of quantitative finance.
-    """)
-
-    st.header("Vision & Next Steps")
-    st.markdown("""
-    Originally, the app focused on pricing a **single option at a time** through manual input.  
-    However, I realized this approach was tedious and limited in utility, so I added a **Bulk Pricing** feature that lets users upload a `.json` file for batch computation.
-
-    In the future, I may integrate this into a larger platform that showcases all of my finance-related projects,  
-    potentially including **real-time market data**, **dynamic pricing tools**, and deeper analytical capabilities.
-    """)
     st.markdown("---")
     st.header("📎 Connect With Me")
 
