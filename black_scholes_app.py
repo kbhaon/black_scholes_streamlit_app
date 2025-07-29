@@ -6,6 +6,34 @@ from jax import vmap
 import streamlit as st
 import pandas as pd
 import json
+import yfinance as yf
+import datetime
+
+# will use to directly import yfinance options data into pricer
+def get_options(ticker, r=0.05):
+    dat = yf.Ticker(ticker)
+    S = dat.history(period="1d")["Close"][-1]
+
+    options_data = []
+    for exp in dat.options:
+        expiration = datetime.strptime(exp, "%Y-%m-%d")
+        T = (expiration - datetime.now()).days / 365.0
+
+        #Calls
+        calls = dat.option_chain(exp).calls.copy()
+        calls["type"] = "call"
+        calls["expiration"] = exp
+        calls["T"] = T
+        calls["S"] = S
+        
+        #Puts
+        puts = dat.option_chain(exp).puts.copy()
+        puts["type"] = "put"
+        puts["expiration"] = exp
+        puts["T"] = T
+        puts["S"] = S
+
+    return pd.concat(options_data, ignore_index=True)
 
 
 def black_scholes(s, k, t, r, sigma, option_type="call"):
@@ -77,7 +105,7 @@ def bs_price_and_greeks(s, k, t, r, sigma, option_type):
 
 st.title("Black-Scholes Options Pricing Tool")
 
-tab1, tab2, tab3 = st.tabs(["Single Option Pricing", "Batch Pricing via JSON", "Why make this?"])
+tab1, tab2, tab3, tab4 = st.tabs(["Single Option Pricing", "Batch Pricing via JSON", "Real-Time Pricing via ticker", "Why make this?"])
 
 with tab1:
     st.header("Single Option Pricing + Greeks")
@@ -152,12 +180,19 @@ with tab2:
 
 
                 csv = df.to_csv(index=False).encode("utf-8")
-                st.download_button("📥 Download CSV", csv, "batch_options_output.csv", "text/csv")
+                st.download_button("Download CSV", csv, "batch_options_output.csv", "text/csv")
 
         except Exception as e:
             st.error(f"Failed to process file: {e}")
     
+
 with tab3:
+    st.header("Real-Time pricing via ticker")
+    st.subheader("""*Data is sourced from yfinance*""")
+
+    st.text_input("")
+
+with tab4:
 
     st.header("Background: Why I am making this?")
     st.markdown("""
