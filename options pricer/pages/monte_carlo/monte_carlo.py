@@ -55,7 +55,3 @@ def option_price_call_asia():
 
     return
 
-
-@jit
-def geometric_brownian_motion_europe():
-    return """
